@@ -3,7 +3,7 @@ package com.rumylera.list;
 import java.util.*;
 
 public class CustomList implements List{
-    public Object[] data;
+    Object[] data;
     int capacity;    // maximum capacity of the list
     int sz;          // current size of the list
     static final int DEFAULT_CAPACITY = 10;
@@ -21,6 +21,7 @@ public class CustomList implements List{
     }
 
     public void add(Object o){
+                                 //add element at the end of list
         if (sz >= capacity) {
             throw new CapacityExceeded("list capacity exceeded");
         }
@@ -28,6 +29,7 @@ public class CustomList implements List{
         sz++;
     }
     public void add(int index, Object o) {
+                                            //add element at given place
         if (index < 0) {
             throw new IndexOutOfBoundsException("!Negative Index!");
         }
@@ -52,4 +54,28 @@ public class CustomList implements List{
             throw new RuntimeException("Index out of bounds");
         }
         return data[index];
+    }
+
+    public Object remove(int index) {
+                                                    //delete element at give index
+    }
+        if (index >= sz || index < 0) {
+            throw new NoSuchElementException("No such index");
+        }
+        Object object = data[index];
+        for (int j = index; j < sz - 1; j++) {
+            data[j] = data[j + 1];
+        }
+        sz--;
+        return object;
+    }
+
+    public boolean contains(Object o) {
+                                      //check if there's such element
+        for (int i = 0; i < sz; i++) {
+            if (data[i].equals(o)) {
+                return true;
+            }
+        }
+        return false;
     }
